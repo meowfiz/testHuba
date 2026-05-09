@@ -16,6 +16,16 @@ from datetime import datetime
 
 import pandas as pd
 
+try:
+    import data_analyzer as _data_analyzer
+    _HAS_ANALYZER = True
+except ImportError:
+    _HAS_ANALYZER = False
+    print(
+        "Ostrzeżenie: Brak matplotlib/seaborn – raport HTML pominięty. "
+        "Zainstaluj: pip install matplotlib seaborn"
+    )
+
 
 POLISH_CHARS = set('ąćęłńóśźżĄĆĘŁŃÓŚŹŻ')
 
@@ -130,6 +140,7 @@ def merge_csvs(src_dir: str, dst_dir: str, config_path: str) -> None:
         sys.exit(1)
 
     dfs = []
+    frames: dict = {}
     for filepath in csv_files:
         df = read_csv_safe(filepath)
         df.columns = [c.lower().strip() for c in df.columns]
@@ -158,6 +169,7 @@ def merge_csvs(src_dir: str, dst_dir: str, config_path: str) -> None:
             continue
 
         dfs.append(df)
+        frames[fname] = df.copy()
 
     if not dfs:
         print("Żaden plik nie przeszedł filtrowania kryterium1.")
@@ -192,6 +204,9 @@ def merge_csvs(src_dir: str, dst_dir: str, config_path: str) -> None:
     print(report_text)
     print(f"\nPlik wynikowy : {output_file}")
     print(f"Raport        : {report_file}")
+
+    if _HAS_ANALYZER:
+        _data_analyzer.generate_report(frames, merged, dst_dir)
 
 
 def _fix_console_encoding() -> None:
