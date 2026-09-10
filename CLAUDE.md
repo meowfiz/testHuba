@@ -1,3 +1,5 @@
+@ZASADY_PRACY.md
+
 # Kontekst projektu – huba / csv_merger
 
 ## Repozytorium
