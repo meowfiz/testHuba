@@ -1,1 +1,3 @@
 # testHuba
+
+postep dziala
