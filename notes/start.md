@@ -1,8 +1,9 @@
 # START — <nazwa projektu>
 
-## Ostatnia sesja — RRRR-MM-DD (sesja 1)
+## Ostatnia sesja — 2026-09-19 (sesja 2)
 
-- (co zrobiono, liczby nie przymiotniki)
+- README.md: dopisana 1 linia na koncu ("e2e test 19 wrzesnia"), plik ma teraz 3 linie.
+- Testy nieuruchomione: `pytest` odrzucony przez bramke uprawnien w sesji nieinteraktywnej.
 
 **Aktywne TODO:** `openspec/changes/*/tasks.md`
 
